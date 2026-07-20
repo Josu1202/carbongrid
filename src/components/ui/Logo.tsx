@@ -1,21 +1,32 @@
-import { Zap } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
 
-import { APP_NAME } from "@/constants/app";
-
-export function Logo({ compact = false }: { compact?: boolean }) {
+export function Logo() {
   return (
-    <div className="flex items-center gap-3">
-      <div className="grid h-10 w-10 place-items-center rounded-2xl bg-blue-600 text-white shadow-lg shadow-blue-600/20">
-        <Zap size={21} fill="currentColor" />
+    <Link
+      href="/dashboard"
+      className="flex items-center gap-3"
+      aria-label="Ir al panel principal de CarbonGrid"
+    >
+      <div className="relative h-10 w-10 overflow-hidden rounded-xl">
+        <Image
+          src="/images/carbongrid-logo.png"
+          alt="Logo de CarbonGrid"
+          fill
+          priority
+          className="object-cover"
+          sizes="40px"
+        />
       </div>
-      {!compact && (
-        <div>
-          <p className="text-base font-bold tracking-tight text-slate-950 dark:text-white">
-            {APP_NAME}
-          </p>
-          <p className="text-xs text-slate-500 dark:text-slate-400">Electricity Maps Demo</p>
-        </div>
-      )}
-    </div>
+
+      <div className="leading-tight">
+        <p className="text-base font-black text-white">
+          Carbon<span className="text-cyan-400">Grid</span>
+        </p>
+        <p className="text-xs text-slate-400">
+          Electricity Maps Demo
+        </p>
+      </div>
+    </Link>
   );
 }
