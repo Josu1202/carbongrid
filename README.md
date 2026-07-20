@@ -1,69 +1,60 @@
-# CarbonGrid — Fase 1
+# CarbonGrid — Fase 2
 
-Base visual de la aplicación demostrativa para el taller **Sostenibilidad digital y análisis energético mediante Electricity Maps**.
+Dashboard demostrativo para interpretar datos eléctricos de Electricity Maps con una integración segura desde el servidor.
 
-## Tecnologías
+## Incluido
 
-- Next.js 16 (App Router)
-- React 19
-- TypeScript
-- Tailwind CSS 4
-- Lucide React
-- Recharts preparado para las siguientes fases
+- Nueva identidad visual inspirada en energía eléctrica: azul profundo, cian y amarillo de alta tensión.
+- Selector de zonas eléctricas.
+- Ruta segura `GET /api/electricity/latest?zone=SV`.
+- La API key nunca llega al navegador.
+- Consulta de intensidad de carbono, mezcla eléctrica y flujos.
+- Normalización compatible con respuestas que usan objeto raíz o arreglo `data`.
+- Manejo de errores y fallback automático a datos locales.
+- Indicadores de modo en vivo/demostración, estimación, actualización y granularidad.
+- Skeleton de carga y actualización manual.
 
-## Incluido en esta fase
-
-- Dashboard responsive.
-- Barra lateral en escritorio y menú móvil.
-- Barra superior.
-- Tema claro y oscuro persistente.
-- Tarjetas reutilizables de indicadores.
-- Mezcla eléctrica demostrativa.
-- Espacios preparados para comparación y recomendación.
-- Datos locales de demostración.
-- Variables de entorno preparadas para la API.
-
-## Ejecutar
+## Instalación
 
 ```bash
 npm install
+cp .env.example .env.local
 npm run dev
 ```
 
-Abre `http://localhost:3000`. La página principal redirige a `/dashboard`.
+En Windows puedes copiar `.env.example` manualmente y renombrarlo como `.env.local`.
 
 ## API key
 
-1. Copia `.env.example` como `.env.local`.
-2. En la siguiente fase coloca la clave así:
+En `.env.local` coloca:
 
 ```env
-ELECTRICITY_MAPS_API_KEY=TU_CLAVE
-ELECTRICITY_MAPS_API_BASE_URL=https://api.electricitymaps.com
+ELECTRICITY_MAPS_API_KEY=TU_CLAVE_REAL
+NEXT_PUBLIC_DEMO_MODE=false
+```
+
+La URL y los paths pueden cambiar según el producto o licencia mostrada en tu Playground. Si tu Playground genera rutas distintas, copia esos valores en:
+
+```env
+ELECTRICITY_MAPS_API_BASE_URL=
+ELECTRICITY_MAPS_CARBON_INTENSITY_PATH=
+ELECTRICITY_MAPS_POWER_BREAKDOWN_PATH=
+ELECTRICITY_MAPS_FLOWS_PATH=
+```
+
+La aplicación envía la clave mediante `auth-token` y también `Authorization: Bearer` para facilitar la adaptación entre configuraciones. Puedes conservar únicamente el encabezado que exija tu cuenta.
+
+## Modo demostración
+
+```env
 NEXT_PUBLIC_DEMO_MODE=true
 ```
 
-La variable **no** utiliza el prefijo `NEXT_PUBLIC_`, porque la clave se manejará en una ruta del servidor para evitar exponerla en el navegador.
+Usa siempre datos locales. Con `false`, intenta la API; si la API falla, activa automáticamente el respaldo e informa al usuario.
 
-## Estructura principal
+## Verificación
 
-```text
-app/
-  dashboard/page.tsx
-  globals.css
-  layout.tsx
-  page.tsx
-src/
-  components/
-    dashboard/
-    layout/
-    ui/
-  constants/
-  data/
-  lib/
-  types/
+```bash
+npm run lint
+npm run build
 ```
-
-## Siguiente fase
-
-Integración segura con Electricity Maps mediante rutas API de Next.js, validación de respuestas, manejo de errores y fallback automático a datos locales.

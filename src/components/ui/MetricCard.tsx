@@ -1,45 +1,33 @@
-import { ArrowUpRight } from "lucide-react";
-
 import { cn } from "@/lib/cn";
 import type { MetricDefinition } from "@/types/dashboard";
 
 const tones = {
-  blue: "bg-blue-50 text-blue-700 dark:bg-blue-500/10 dark:text-blue-300",
-  green: "bg-emerald-50 text-emerald-700 dark:bg-emerald-500/10 dark:text-emerald-300",
-  cyan: "bg-cyan-50 text-cyan-700 dark:bg-cyan-500/10 dark:text-cyan-300",
-  amber: "bg-amber-50 text-amber-700 dark:bg-amber-500/10 dark:text-amber-300",
+  blue: "from-blue-500/25 to-blue-400/5 text-blue-200 ring-blue-400/20",
+  cyan: "from-cyan-400/25 to-cyan-300/5 text-cyan-200 ring-cyan-300/20",
+  yellow: "from-yellow-300/25 to-yellow-200/5 text-yellow-100 ring-yellow-300/20",
+  electric: "from-blue-600/35 via-cyan-400/15 to-transparent text-cyan-100 ring-cyan-300/25",
+  green: "from-emerald-400/25 to-emerald-300/5 text-emerald-200 ring-emerald-300/20",
+  amber: "from-amber-400/25 to-amber-300/5 text-amber-100 ring-amber-300/20",
 };
 
 export function MetricCard({ metric }: { metric: MetricDefinition }) {
   const Icon = metric.icon;
-
   return (
-    <article className="surface-card group p-5">
+    <article className="energy-card group relative overflow-hidden p-5">
+      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-cyan-300/60 to-transparent opacity-0 transition group-hover:opacity-100" />
       <div className="flex items-start justify-between gap-4">
-        <div className={cn("grid h-11 w-11 place-items-center rounded-2xl", tones[metric.tone])}>
+        <div className={cn("grid h-11 w-11 place-items-center rounded-2xl bg-gradient-to-br ring-1", tones[metric.tone])}>
           <Icon size={21} />
         </div>
-        <ArrowUpRight
-          size={18}
-          className="text-slate-300 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5 dark:text-slate-600"
-        />
+        <span className="live-dot" aria-hidden="true" />
       </div>
-
-      <div className="mt-6">
-        <p className="text-sm font-medium text-slate-500 dark:text-slate-400">{metric.label}</p>
-        <div className="mt-2 flex items-baseline gap-2">
-          <span className="text-3xl font-bold tracking-tight text-slate-950 dark:text-white">
-            {metric.value}
-          </span>
-          {metric.unit && (
-            <span className="text-sm font-semibold text-slate-500 dark:text-slate-400">
-              {metric.unit}
-            </span>
-          )}
+      <div className="mt-7">
+        <p className="text-xs font-extrabold uppercase tracking-[0.14em] text-slate-400">{metric.label}</p>
+        <div className="mt-3 flex flex-wrap items-end gap-2">
+          <span className="text-4xl font-black tracking-[-0.04em] text-white">{metric.value}</span>
+          {metric.unit && <span className="pb-1 text-xs font-bold text-slate-400">{metric.unit}</span>}
         </div>
-        <p className="mt-3 text-sm leading-6 text-slate-500 dark:text-slate-400">
-          {metric.description}
-        </p>
+        <p className="mt-4 text-sm leading-6 text-slate-400">{metric.description}</p>
       </div>
     </article>
   );

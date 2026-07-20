@@ -1,1 +1,1 @@
-export * from "./DashboardOverview";
+export { ElectricityDashboard } from "./ElectricityDashboard";

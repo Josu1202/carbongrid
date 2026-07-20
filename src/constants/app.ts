@@ -3,7 +3,7 @@ import { ArrowRightLeft, BookOpenText, LayoutDashboard } from "lucide-react";
 import type { NavigationItem } from "@/types/dashboard";
 
 export const APP_NAME = "CarbonGrid";
-export const APP_VERSION = "Fase 1 · v0.1.0";
+export const APP_VERSION = "Fase 2 · v0.2.0";
 
 export const navigationItems: NavigationItem[] = [
   {

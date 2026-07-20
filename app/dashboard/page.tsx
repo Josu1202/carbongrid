@@ -1,10 +1,6 @@
-import { DashboardOverview } from "@/components/dashboard/DashboardOverview";
+import { ElectricityDashboard } from "@/components/dashboard/ElectricityDashboard";
 import { DashboardShell } from "@/components/layout/DashboardShell";
 
 export default function DashboardPage() {
-  return (
-    <DashboardShell>
-      <DashboardOverview />
-    </DashboardShell>
-  );
+  return <DashboardShell><ElectricityDashboard /></DashboardShell>;
 }

@@ -1,6 +1,6 @@
 import type { LucideIcon } from "lucide-react";
 
-export type MetricTone = "blue" | "green" | "cyan" | "amber";
+export type MetricTone = "blue" | "cyan" | "yellow" | "electric" | "green" | "amber";
 
 export interface MetricDefinition {
   id: string;
