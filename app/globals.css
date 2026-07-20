@@ -105,3 +105,32 @@ html:not(.dark) .flow-row { border-color: rgba(15,36,77,.08); background: rgba(2
   pointer-events: none;
 }
 html:not(.dark) .carbon-glow { background: rgba(25,118,255,.12); }
+
+/* CarbonGrid Fase 3: comparison experience */
+.comparison-hero { grid-template-columns: 1fr auto; }
+.comparison-vs { display:grid; place-items:center; width:52px; height:52px; border-radius:999px; border:1px solid rgba(34,211,238,.2); background:rgba(34,211,238,.08); color:#67e8f9; font-size:12px; font-weight:900; box-shadow:0 0 30px rgba(34,211,238,.12); }
+.scenario-card { position:relative; overflow:hidden; border-radius:1.35rem; border:1px solid rgba(255,255,255,.07); background:rgba(255,255,255,.025); padding:1.25rem; transition:.25s ease; }
+.scenario-card::after { content:""; position:absolute; inset:auto -50px -90px auto; width:170px; height:170px; border-radius:999px; background:rgba(25,118,255,.11); filter:blur(42px); pointer-events:none; }
+.scenario-winner { border-color:rgba(34,211,238,.28); background:linear-gradient(145deg,rgba(34,211,238,.09),rgba(25,118,255,.05)); box-shadow:0 18px 55px rgba(25,118,255,.11); }
+.scenario-letter { display:grid; place-items:center; width:36px; height:36px; border-radius:12px; background:linear-gradient(135deg,#1976ff,#22d3ee); color:white; font-size:12px; font-weight:900; box-shadow:0 8px 24px rgba(25,118,255,.22); }
+.scenario-label { display:block; font-size:10px; text-transform:uppercase; letter-spacing:.13em; font-weight:900; color:#64748b; }
+.scenario-value { display:block; margin-top:.35rem; font-size:1.65rem; line-height:1; color:white; letter-spacing:-.04em; }
+.scenario-card small { display:block; margin-top:.35rem; font-size:10px; font-weight:700; color:#64748b; }
+.winner-chip { display:inline-flex; align-items:center; gap:.45rem; margin-top:1.15rem; border:1px solid rgba(34,211,238,.22); background:rgba(34,211,238,.08); color:#a5f3fc; padding:.45rem .75rem; border-radius:999px; font-size:10px; text-transform:uppercase; letter-spacing:.1em; font-weight:900; }
+.formula-card { border-radius:1.15rem; border:1px solid rgba(255,255,255,.07); background:rgba(255,255,255,.025); padding:1rem; }
+.formula-symbol { display:grid; place-items:center; width:27px; height:27px; border-radius:9px; background:rgba(34,211,238,.08); color:#67e8f9; }
+.comparison-stat { display:flex; align-items:center; justify-content:space-between; gap:1rem; border-radius:1rem; border:1px solid rgba(255,255,255,.06); background:rgba(255,255,255,.025); padding:1rem; font-size:12px; color:#94a3b8; }
+.comparison-stat strong { color:white; font-size:1rem; }
+.recommendation-card { position:relative; overflow:hidden; border-radius:1.6rem; border:1px solid rgba(250,204,21,.18); background:linear-gradient(145deg,rgba(52,39,5,.82),rgba(13,20,38,.95) 58%,rgba(7,23,43,.96)); padding:1.5rem; box-shadow:0 24px 75px rgba(0,0,0,.25); }
+.recommendation-card::after { content:""; position:absolute; right:-80px; top:-100px; width:240px; height:240px; border-radius:999px; background:rgba(250,204,21,.12); filter:blur(55px); pointer-events:none; }
+.recommendation-card > * { position:relative; z-index:1; }
+.recommendation-icon { display:grid; place-items:center; width:50px; height:50px; margin-bottom:1.25rem; border-radius:16px; border:1px solid rgba(250,204,21,.22); background:rgba(250,204,21,.09); color:#fde047; box-shadow:0 0 32px rgba(250,204,21,.11); }
+
+html:not(.dark) .scenario-card, html:not(.dark) .formula-card, html:not(.dark) .comparison-stat { border-color:rgba(15,36,77,.09); background:rgba(25,118,255,.035); }
+html:not(.dark) .scenario-winner { border-color:rgba(25,118,255,.24); background:linear-gradient(145deg,rgba(34,211,238,.11),rgba(25,118,255,.05)); }
+html:not(.dark) .scenario-value, html:not(.dark) .comparison-stat strong { color:#081a3a; }
+html:not(.dark) .recommendation-card { border-color:rgba(180,130,0,.20); background:linear-gradient(145deg,#fff8d6,#eaf6ff 62%,#f7fbff); }
+html:not(.dark) .recommendation-card .text-white { color:#081a3a !important; }
+html:not(.dark) .recommendation-card .text-slate-300 { color:#385477 !important; }
+html:not(.dark) .recommendation-card .text-yellow-50\/80 { color:#6b5500 !important; }
+@media (max-width: 1279px) { .comparison-hero { grid-template-columns:1fr; } }
