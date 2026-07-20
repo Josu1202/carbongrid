@@ -28,12 +28,6 @@ export function Sidebar({ mobile = false, onClose }: { mobile?: boolean; onClose
           );
         })}
       </nav>
-      <div className="p-4">
-        <div className="rounded-2xl border border-cyan-300/10 bg-gradient-to-br from-cyan-300/[.08] to-blue-500/[.05] p-4">
-          <div className="flex gap-3"><Info className="mt-0.5 shrink-0 text-cyan-300" size={17} /><div><p className="text-sm font-black text-white">Integración protegida</p><p className="mt-1 text-xs leading-5 text-slate-400">La clave permanece en el servidor. Los datos locales sostienen la demostración ante fallos.</p></div></div>
-        </div>
-        <div className="mt-4 flex items-center justify-between px-2 text-xs text-slate-600"><span>{APP_VERSION}</span><span className="flex items-center gap-1"><Bolt size={12} /> CIIC 2026</span></div>
-      </div>
     </aside>
   );
 }

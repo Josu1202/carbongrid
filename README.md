@@ -58,3 +58,7 @@ Usa siempre datos locales. Con `false`, intenta la API; si la API falla, activa 
 npm run lint
 npm run build
 ```
+
+## Fase 5 — Ventana limpia
+
+Abre `http://localhost:3000/planner` para comparar el periodo actual con la ventana reciente de menor intensidad promedio. La herramienta permite seleccionar actividad, consumo y duración, y utiliza datos demostrativos cuando el historial en vivo no está disponible.

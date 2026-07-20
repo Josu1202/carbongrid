@@ -49,3 +49,58 @@ export async function getLiveSnapshot(zone: string): Promise<ElectricitySnapshot
     flowsPayload: flowsResult,
   });
 }
+
+import { normalizeCarbonHistory } from "@/services/electricity/history-normalizer";
+import type { CarbonHistorySeries } from "@/types/electricity";
+
+export async function getLiveHistory(zone: string, hours = 24): Promise<CarbonHistorySeries> {
+  const historyPath = process.env.ELECTRICITY_MAPS_CARBON_HISTORY_PATH || "/carbon-intensity/past-range";
+  const end = new Date();
+  const start = new Date(end.getTime() - hours * 60 * 60 * 1000);
+  const apiKey = process.env.ELECTRICITY_MAPS_API_KEY?.trim();
+  if (!apiKey) throw new Error("ELECTRICITY_MAPS_API_KEY no está configurada.");
+
+  const baseUrl = (process.env.ELECTRICITY_MAPS_API_BASE_URL || DEFAULT_BASE_URL).replace(/\/$/, "");
+  const normalizedPath = historyPath.startsWith("/") ? historyPath : `/${historyPath}`;
+  const params = new URLSearchParams({
+    zone,
+    start: start.toISOString(),
+    end: end.toISOString(),
+    temporalGranularity: process.env.ELECTRICITY_MAPS_HISTORY_GRANULARITY || "hourly",
+  });
+
+  const response = await fetch(`${baseUrl}${normalizedPath}?${params.toString()}`, {
+    method: "GET",
+    headers: {
+      [process.env.ELECTRICITY_MAPS_AUTH_HEADER || "auth-token"]: apiKey,
+      Accept: "application/json",
+    },
+    cache: "no-store",
+  });
+
+  if (!response.ok) {
+    const body = await response.text();
+
+    if (response.status === 401 || response.status === 403) {
+      const accessError = new Error(
+        `El historial en vivo no está disponible para la zona ${zone} con la licencia actual.`
+      );
+      accessError.name = "ElectricityMapsHistoryAccessError";
+      throw accessError;
+    }
+
+    if (response.status === 404) {
+      const coverageError = new Error(
+        `Electricity Maps no ofrece historial para la zona ${zone} con esta configuración.`
+      );
+      coverageError.name = "ElectricityMapsHistoryCoverageError";
+      throw coverageError;
+    }
+
+    throw new Error(
+      `No fue posible consultar el historial de Electricity Maps (código ${response.status}). ${body.slice(0, 120)}`
+    );
+  }
+
+  return normalizeCarbonHistory(zone, await response.json());
+}

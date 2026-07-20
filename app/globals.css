@@ -134,3 +134,13 @@ html:not(.dark) .recommendation-card .text-white { color:#081a3a !important; }
 html:not(.dark) .recommendation-card .text-slate-300 { color:#385477 !important; }
 html:not(.dark) .recommendation-card .text-yellow-50\/80 { color:#6b5500 !important; }
 @media (max-width: 1279px) { .comparison-hero { grid-template-columns:1fr; } }
+
+/* CarbonGrid Fase 5: clean-window planner */
+.planner-window {
+  border: 1px solid rgba(250,204,21,.18);
+  background: linear-gradient(135deg,rgba(250,204,21,.08),rgba(34,211,238,.035));
+}
+html:not(.dark) .planner-window {
+  border-color: rgba(180,130,0,.2);
+  background: linear-gradient(135deg,rgba(250,204,21,.13),rgba(25,118,255,.035));
+}

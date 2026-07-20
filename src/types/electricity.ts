@@ -43,3 +43,35 @@ export interface ZoneOption {
   code: string;
   name: string;
 }
+
+export interface CarbonHistoryPoint {
+  datetime: string;
+  carbonIntensity: number;
+  isEstimated: boolean;
+}
+
+export interface CarbonHistoryStats {
+  minimum: number;
+  maximum: number;
+  average: number;
+  minimumAt: string;
+  maximumAt: string;
+}
+
+export interface CarbonHistorySeries {
+  zoneCode: string;
+  zoneName: string;
+  temporalGranularity: string;
+  points: CarbonHistoryPoint[];
+  stats: CarbonHistoryStats;
+  mode: DataMode;
+  source: "Electricity Maps" | "Datos locales de demostración";
+  warning?: string;
+}
+
+export interface CarbonHistoryApiResponse {
+  ok: boolean;
+  data?: CarbonHistorySeries;
+  error?: string;
+  details?: string;
+}
